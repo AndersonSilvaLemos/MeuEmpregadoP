@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<!--  IMPORTANDO HEAD -->
+	<ui:include src="incPainel/painelHead.xhtml" />
+</h:head>
+<h:body class="nav-md">
+
+	<div class="container body">
+
+		<div class="main_container">
+
+			<!--  IMPORTANDO MENU PRINCIPAL -->
+			<ui:include src="incPainel/painelMenu.xhtml" />
+
+			<!-- IMPORTANDO MENU TOPO -->
+			<ui:include src="incPainel/painelMenuTopo.xhtml" />
+			<!-- PAGINA PRINCIPAL -->
+
+			<div class="right_col" role="main">
+				<div class="">
+					<!-- INSIRA SEU TITULO -->
+
+					<div class="clearfix"></div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>
+										Cadastrar Clientes <small>Cadastre seu funcionário</small>
+									</h2>
+									<ul class="nav navbar-right panel_toolbox">
+										<li><a class="collapse-link"><i
+												class="fa fa-chevron-up"></i></a></li>
+										<li class="dropdown"><a href="#" class="dropdown-toggle"
+											data-toggle="dropdown" role="button" aria-expanded="false"><i
+												class="fa fa-wrench"></i></a>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="#">Configuração</a></li>
+											</ul></li>
+										<li><a class="close-link"><i class="fa fa-close"></i></a>
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<br />
+
+									<!-- INSIRA SEU <form> -->
+
+
+
+									<main class="container">
+									<h1>Novo Lançamento</h1>
+									<hr />
+									<f:view>
+										<h:form>
+											<div>
+												<h:outputLabel value="Tipo:" />
+												<h:selectOneMenu style="width:100%"
+													styleClass="form-control"
+													value="#{lancamentoManagedBean.lancamento.tipoLancamento.idTipo}">
+													<f:selectItem itemValue="0" itemLabel="Selecione Tipo" />
+													<f:selectItem itemValue="1" itemLabel="Receita" />
+													<f:selectItem itemValue="2" itemLabel="Despesa" />
+
+												</h:selectOneMenu>
+
+												<!-- Botão Novo Tipo Lancamento -->
+												<!--<h:commandLink styleClass="btn btn-primary" value="Novo Tipo" action="novoTipoLancamento?faces-redirect=true"/> -->
+											</div>
+											<br />
+											<div class="form-group">
+												<h:outputLabel value="Data:" />
+												<h:inputText styleClass="form-control"
+													value="#{lancamentoManagedBean.lancamento.data}" />
+											</div>
+											<div class="form-group">
+												<h:outputLabel value="Documento:" />
+												<h:inputText styleClass="form-control"
+													value="#{lancamentoManagedBean.lancamento.documento}" />
+											</div>
+											<div class="form-group">
+												<h:outputLabel value="Valor:" />
+												<h:inputText styleClass="form-control"
+													value="#{lancamentoManagedBean.lancamento.valor}" />
+											</div>
+
+											<div>
+												<h:outputLabel value="Atividade:" />
+												<h:selectOneMenu styleClass="form-control"
+													value="#{lancamentoManagedBean.lancamento.atividade.idAtividade}">
+													<f:selectItem itemValue="0" itemLabel="Selecione Atividade" />
+													<f:selectItems
+														value="#{lancamentoManagedBean.listAtividade}"
+														var="atividade" itemValue="#{atividade.idAtividade}"
+														itemLabel="#{atividade.descricao}"></f:selectItems>
+												</h:selectOneMenu>
+												<!-- Botão Nova Atividade -->
+												<h:commandLink styleClass="btn btn-primary"
+													value="Nova Atividade"
+													action="novaAtividade?faces-redirect=true" />
+											</div>
+											<br />
+											<div id="actions" class="row">
+												<div class="col-md-12">
+													<h:commandLink styleClass="btn btn-primary" value="Save"
+														action="#{lancamentoManagedBean.insertLancamentoAction}" />
+													<h:commandLink styleClass="btn btn-default" value="Cancel"
+														action="index?faces-redirect=true" />
+												</div>
+											</div>
+										</h:form>
+									</f:view> </main>
+
+
+
+
+									<!-- INSIRA SEU </form> -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			
+			<!-- / PAGINA PRINCIPAL -->
+			
+		</div>
+
+		
+
+		<!-- FOOTER PRINCIPAL -->
+		<ui:include src="incPainel/painelFooter.xhtml" />
+		<!-- /FOOTER PRINCIPAL -->
+	</div>
+	<!-- IMPORT JS -->
+	<ui:include src="incPainel/painelImportsJs.xhtml" />
+	<!-- /IMPORT JS -->
+</h:body>
+</html>

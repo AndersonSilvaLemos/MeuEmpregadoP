@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<!--  IMPORTANDO HEAD -->
+	<ui:include src="incPainel/painelHead.xhtml" />
+</h:head>
+<h:body class="nav-md">
+
+	<div class="container body">
+
+		<div class="main_container">
+
+			<!--  IMPORTANDO MENU PRINCIPAL -->
+			<ui:include src="incPainel/painelMenu.xhtml" />
+
+			<!-- IMPORTANDO MENU TOPO -->
+			<ui:include src="incPainel/painelMenuTopo.xhtml" />
+			<!-- PAGINA PRINCIPAL -->
+
+			<div class="right_col" role="main">
+				<div class="">
+					<!-- INSIRA SEU TITULO -->
+
+					<div class="clearfix"></div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>
+										Cadastrar Clientes <small>Cadastre seu funcionário</small>
+									</h2>
+									<ul class="nav navbar-right panel_toolbox">
+										<li><a class="collapse-link"><i
+												class="fa fa-chevron-up"></i></a></li>
+										<li class="dropdown"><a href="#" class="dropdown-toggle"
+											data-toggle="dropdown" role="button" aria-expanded="false"><i
+												class="fa fa-wrench"></i></a>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="#">Configuração</a></li>
+											</ul></li>
+										<li><a class="close-link"><i class="fa fa-close"></i></a>
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<br />
+
+									<!-- INSIRA SEU <form> -->
+
+									<main class="container">
+									<h1>Receitas e Despesas</h1>
+									<hr />
+
+									<f:view>
+										<h:form styleClass="form-inline">
+											<div id="actions" class="search">
+												<div class="col-md-12">
+													<br /> <br />
+													<h:selectOneMenu style="width:38%"
+														styleClass="form-control"
+														value="#{lancamentoManagedBean.lancamento.tipoLancamento.idTipo}">
+														<f:selectItem itemValue="0" itemLabel="Selecione Tipo" />
+														<f:selectItem itemValue="1" itemLabel="Receita" />
+														<f:selectItem itemValue="2" itemLabel="Despesa" />
+													</h:selectOneMenu>
+													.
+													<h:selectOneMenu style="width:39%"
+														styleClass="form-control"
+														value="#{lancamentoManagedBean.lancamento.atividade.idAtividade}">
+														<f:selectItem itemValue="0"
+															itemLabel="Selecione Atividade" />
+														<f:selectItems
+															value="#{lancamentoManagedBean.listAtividade}"
+															var="atividade" itemValue="#{atividade.idAtividade}"
+															itemLabel="#{atividade.descricao}"></f:selectItems>
+													</h:selectOneMenu>
+													.
+													<h:commandButton styleClass="btn btn-primary"
+														value="Pesquisar"
+														action="#{lancamentoManagedBean.SearchLancamentoAction}" />
+												</div>
+											</div>
+											<br />
+
+											<p:panel id="tblancamento">
+												<h:dataTable styleClass="table table-striped" var="c"
+													value="#{lancamentoManagedBean.listLancamento}">
+													<h:column>
+														<f:facet name="header">
+															<h:outputLabel value="Tipo" />
+														</f:facet>
+														<h:outputText value="#{c.tipoLancamento.descricao}" />
+													</h:column>
+													<h:column>
+														<f:facet name="header">
+															<h:outputLabel value="Data" />
+														</f:facet>
+														<h:outputText value="#{c.data}" />
+													</h:column>
+													<h:column>
+														<f:facet name="header">
+															<h:outputLabel value="Documento" />
+														</f:facet>
+														<h:outputText value="#{c.documento}" />
+													</h:column>
+													<h:column>
+														<f:facet name="header">
+															<h:outputLabel value="Valor" />
+														</f:facet>
+														<h:outputText value="#{c.valor}" />
+													</h:column>
+													<h:column>
+														<f:facet name="header">
+															<h:outputLabel value="Atividade" />
+														</f:facet>
+														<h:outputText value="#{c.atividade.descricao}" />
+													</h:column>
+
+													<!-- Editar -->
+													<h:column>
+														<h:commandLink styleClass="btn btn-sm btn-success"
+															value="Editar"
+															action="editarLancamento?faces-redirect=true">
+															<f:setPropertyActionListener
+																target="#{lancamentoManagedBean.lancamento}"
+																value="#{c}" />
+														</h:commandLink>
+														<!-- Excluir -->
+														<h:commandLink styleClass="btn btn-sm btn-danger"
+															value="Excluir"
+															action="excluirLancamento?faces-redirect=true">
+															<f:setPropertyActionListener
+																target="#{lancamentoManagedBean.lancamento}"
+																value="#{c}" />
+
+														</h:commandLink>
+													</h:column>
+												</h:dataTable>
+											</p:panel>
+											<br />
+											<!-- Botão Novo Lançamento -->
+											<h:commandLink styleClass="btn btn-primary"
+												value="Novo Lancamento"
+												action="novoLancamento?faces-redirect=true" />
+
+											<!-- Modal de Delete-->
+											<div class="modal fade" id="delete-modal" tabindex="-1"
+												role="dialog" aria-labelledby="modalLabel">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Fechar">
+																<span aria-hidden="true"></span>
+															</button>
+															<h1 class="modal-title" id="modalLabel">Excluir Item</h1>
+														</div>
+														<div class="modal-body">Deseja realmente excluir
+															este item?</div>
+														<div class="modal-footer">
+															<h:commandLink styleClass="btn btn-primary"
+																value="Delete"
+																action="#{lancamentoManagedBean.deleteLancamentoAction}" />
+															<h:commandLink styleClass="btn btn-default"
+																value="Cancel" action="index?faces-redirect=true" />
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /.modal -->
+										</h:form>
+									</f:view> </main>
+
+
+
+
+									<!-- INSIRA SEU </form> -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			
+			<!-- / PAGINA PRINCIPAL -->
+			
+		</div>
+
+		
+
+		<!-- FOOTER PRINCIPAL -->
+		<ui:include src="incPainel/painelFooter.xhtml" />
+		<!-- /FOOTER PRINCIPAL -->
+	</div>
+	<!-- IMPORT JS -->
+	<ui:include src="incPainel/painelImportsJs.xhtml" />
+	<!-- /IMPORT JS -->
+</h:body>
+</html>
