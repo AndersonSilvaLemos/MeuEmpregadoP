@@ -10,7 +10,7 @@ import com.meuempregado.model.TipoLancamento;
 
 public class TipoLancamentoService {
 	
-	private TipoLancamentoDao dao = new TipoLancamentoDao(); 
+	private TipoLancamentoDao dao = new TipoLancamentoDao(null); 
 	
 	public List<TipoLancamento> listAll(){
 		
@@ -24,13 +24,12 @@ public class TipoLancamentoService {
 	}
 
 	public void updateTipoLancamento(TipoLancamento tipoLancamento) {
+		
 		// TODO Auto-generated method stub
-		}
-	
-	public TipoLancamento TipoLancamentoPorId(Integer id) throws SQLException, ClassNotFoundException, IOException {
-		TipoLancamentoDao dao = new TipoLancamentoDao();
-		TipoLancamento tl = dao.tipoPorId(id);
-		return tl;
 	}
-
+	
+	public TipoLancamento TipoLancamentoPorId(Integer idTipo) throws SQLException, ClassNotFoundException, IOException {
+		
+		return dao.tipoLancamentoId(idTipo);
+	}
 }

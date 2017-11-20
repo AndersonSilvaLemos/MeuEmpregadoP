@@ -10,29 +10,24 @@ import com.meuempregado.model.Atividade;
 
 public class AtividadeService {
 	
-	private AtividadeDao dao = new AtividadeDao(); 
+	private AtividadeDao dao = new AtividadeDao(Atividade.class); 
 	public List<Atividade> listAll(){
-		
-		dao = new AtividadeDao();
 		return dao.listarTodos();
 	}
 	
 	public void insertAtividade(Atividade a){
 		if(a != null)
-
-			dao.insertAtividade(a);
+			dao.inserir(a);
 	}
 
 	public void updateAtividade(Atividade atividade) {
 		// TODO Auto-generated method stub
-		
+		dao.alterar(atividade);
 		
 	}
 	
 	public Atividade AtividadePorId(Integer id) throws SQLException, ClassNotFoundException, IOException {
-		AtividadeDao dao = new AtividadeDao();
-		Atividade a = dao.atividadePorId(id);
-		return a;
+		return (Atividade) dao.buscarPorId(id);
 	}
 
 }

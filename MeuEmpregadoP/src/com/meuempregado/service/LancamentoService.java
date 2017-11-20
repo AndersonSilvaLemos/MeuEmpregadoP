@@ -12,11 +12,10 @@ import com.meuempregado.model.Lancamento;
 public class LancamentoService {
 	
 
-		private LancamentoDao dao = new LancamentoDao(); 
+		private LancamentoDao dao = new LancamentoDao(null); 
 		
 		public List<Lancamento> listAll(){
 			
-			dao = new LancamentoDao();
 			return dao.listarTodos();
 		}
 		
@@ -35,31 +34,16 @@ public class LancamentoService {
 			dao.deleteLancamento(l);
 		}
 		
-		public Lancamento LancamentoPorId(Integer id) throws SQLException, ClassNotFoundException, IOException {
-			LancamentoDao dao = new LancamentoDao();
-			Lancamento l = dao.lancamentoPorId(id);
-			return l;
+		public Lancamento LancamentoPorId(Integer idLancamento) throws SQLException, ClassNotFoundException, IOException {
+			return dao.lancamentoPorId(idLancamento);
+			
 		}
 		
 		public List<Lancamento> searchLancamento(int idTipo, int idAtividade) {
-			dao = new LancamentoDao();
+			
 			return dao.pesquisar(idTipo, idAtividade);
 		}
 
-		/*
-		public List<Lancamento> lancamentoPorId(int idLancamento) throws ClassNotFoundException, SQLException, IOException {
-			//TO-DO
-			List<Lancamento> list = new ArrayList<Lancamento>();
-			
-			if(idLancamento != 0) {
-				list = (List<Lancamento>) dao.lancamentoPorId(idLancamento);
-			}
-			else {
-				list = dao.listarTodos();
-			}	
-			
-			return list;
-		}
-	*/
+		
 
 }

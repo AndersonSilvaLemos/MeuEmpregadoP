@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
 
+import com.meuempregado.model.Lancamento;
 import com.meuempregado.util.ConnectDao;
 
 public class GenericDao<E> implements InterfaceGenericDao<E> { 
@@ -64,7 +65,7 @@ public class GenericDao<E> implements InterfaceGenericDao<E> {
 	}
 
 	@Override
-	public void excluir(Integer id) {
+	public void excluir(E entity) {
 
 		em = ConnectDao.getInstance().createEntityManager();
 
@@ -72,7 +73,7 @@ public class GenericDao<E> implements InterfaceGenericDao<E> {
 
 			em.getTransaction().begin();
 
-			em.remove(em.getReference(entityClass, id));
+			em.remove(em.getReference(entityClass, entity));
 
 			em.getTransaction().commit();
 
